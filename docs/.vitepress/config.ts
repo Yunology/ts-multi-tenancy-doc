@@ -12,6 +12,7 @@ const sidebar: DefaultTheme.Sidebar = [
       { text: 'Introduction', link: '/guide/introduction' },
       { text: 'Installation', link: '/guide/installation' },
       { text: 'Environment Require', link: '/guide/environment-require' },
+      { text: 'Usage', link: '/guide/usage' },
       {
         text: 'Modeling Entities',
         items: [
