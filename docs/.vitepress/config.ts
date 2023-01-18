@@ -24,6 +24,7 @@ const sidebar: DefaultTheme.Sidebar = [
 ];
 
 export default defineConfig({
+  base: '/ts-multi-tenancy-doc/',
   title: 'ts-multi-tenancy',
   themeConfig: {
     nav,
