@@ -13,11 +13,16 @@ const sidebar: DefaultTheme.Sidebar = [
       { text: 'Installation', link: '/guide/installation' },
       { text: 'Environment Require', link: '/guide/environment-require' },
       { text: 'Usage', link: '/guide/usage' },
+    ],
+  },
+  {
+    text: 'Designs',
+    items: [
       {
         text: 'Modeling Entities',
         items: [
-          { text: 'Base Entity', link: '/guide/entities/base' },
-          { text: 'Tenant Base Entity', link: '/guide/entities/tenant-base' },
+          { text: 'Base Entity', link: '/designs/entities/base' },
+          { text: 'Tenant Base Entity', link: '/designs/entities/tenant-base' },
         ],
       },
     ],
