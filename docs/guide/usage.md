@@ -8,18 +8,84 @@
 - 5. Use it
 
 ## 0. Build the environement
+::: details Install & Config
+#### Install TypeScript
+```bash
+yarn add -D typescript
+```
+#### Init & config tsconfig.json
+```bash
+npx tsc --init .
+```
+tsconfig.json
+```json
+{
+  "compilerOptions": {
+    // ...
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+    // ...
+  }
+}
+```
+#### Install dependencies & ts-multi-tenancy
+```bash
+# Install typeorm and require drive
+# At here, we use Posrgres, so instann pg
+yarn add typeorm pg ts-multi-tenancy
+```
+#### Config ts-multi-tenancy configs
+```.env
+## DB_AUTH to PostgreSQL, if docker use, need to be sure.
+DB_URL=postgresql://user:1234@127.0.0.1/dev
+PLAN_NAME=standard
+## true or false when everytime up database
+DB_DROP_SCHEMA=false
+DB_MIGRATIONS_RUN=false
+## boolean | "all" | ("query" | "schema" | "error" | "warn" | "info" | "log" | "migration")
+DB_LOGGING=false
+```
+#### (Optional) TypeORM scripts @ package.json
+```json
+{
+  // ...
+  "scripts": {
+    "typeorm:cli": "ts-node ./node_modules/typeorm/cli.js -d ./cli_datasource.ts",
+    "typeorm:cli:system": "ts-node ./node_modules/typeorm/cli.js -d ./node_modules/@yunology/multi-tenancy/dist/cli_datasource.js"
+  }
+  // ...
+}
+```
+:::
+
+::: details Migration script
+#### Write a migration script
+This script is use to generate migration files for your models.
+```typescript
+
+```
+#### Execute System Require migrations
+```bash
+yarn 
+```
+:::
 
 ## 1. Prepare your model
+::: details Code
 ```typescript
+import { Entity, Column } from 'typeorm';
 import { TenantEntity } from '@yunology/ts-multi-tenancy';
 
+@Entity()
 export class User extends TenantEntity {
   @Column({ type: 'text' })
   name!: string;
 }
 ```
+:::
 
 ## 2. Write the database infrastructure methods
+::: details Code
 ```typescript
 import { InfrastructureManyModifiable } from '@yunology/ts-multi-tenancy';
 
@@ -46,19 +112,21 @@ export class UserInfrastructure extends InfrastructureManyModifiable<User> {
 
   // ... methods how you opearte your database ...
   public getById(
-    manager: EntityManager, runtimeTenant: RuntimeTenant, id: string,
+    manager: EntityManager, { tenantId }: RuntimeTenant, id: string,
   ): Promise<User> {
-    return this.get(
-      manager,
-      { tenantId: runtimeTenant.tenantId, id },
-    );
+    return this.get(manager, { tenantId, id });
   }
 }
 ```
+:::
 
 ## 3. Make service with busniess logics
+::: details Code
 ```typescript
 import { DataService } from '@yunology/ts-multi-tenancy';
+
+import { User } from 'somewhere/you/define/your/model';
+import { UserInfrastructure } from 'somewhere/you/define/your/infras';
 
 export class UserService extends DataService {
   // some local variables
@@ -72,8 +140,13 @@ export class UserService extends DataService {
     return this;
   }
 
-  public async login(account: string, password: string): Promise<User> {
-    // ... logics for checking 
+  public async getById(id: string): Promise<User> {
+    return UserInfrastructure.getInstance().getById(
+      this.tenant.ds.manager,
+      this.tenant,
+      id,
+    );
   }
 }
 ```
+:::
