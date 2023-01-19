@@ -45,28 +45,32 @@ DB_MIGRATIONS_RUN=false
 ## boolean | "all" | ("query" | "schema" | "error" | "warn" | "info" | "log" | "migration")
 DB_LOGGING=false
 ```
-#### (Optional) TypeORM scripts @ package.json
+:::
+
+::: details Migration script (Optional)
+
+If you can find anyother ways to generate & run your migration files.  
+Feel free to write yourself.
+
+#### TypeORM scripts @ package.json
 ```json
 {
   // ...
   "scripts": {
-    "typeorm:cli": "ts-node ./node_modules/typeorm/cli.js -d ./cli_datasource.ts",
-    "typeorm:cli:system": "ts-node ./node_modules/typeorm/cli.js -d ./node_modules/@yunology/multi-tenancy/dist/cli_datasource.js"
+    "typeorm:cli": "npx typeorm -d ./cli_datasource.ts",
+    "typeorm:cli:system": "npx typeorm -d ./node_modules/@yunology/ts-multi-tenancy/dist/cli_datasource.js"
   }
   // ...
 }
 ```
-:::
-
-::: details Migration script
 #### Write a migration script
 This script is use to generate migration files for your models.
 ```typescript
-
+// TBD
 ```
 #### Execute System Require migrations
 ```bash
-yarn 
+# TBD
 ```
 :::
 
