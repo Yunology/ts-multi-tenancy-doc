@@ -1,9 +1,8 @@
 import { DefaultTheme, defineConfig } from "vitepress";
 
-const nav: DefaultTheme.NavItem[] = [
+const nav: Array<DefaultTheme.NavItem> = [
   { text: 'Home', link: '/' },
   { text: 'Usage', link: '/guide/usage/0-build-the-environement' },
-  { text: 'GitHub', link: 'https://github.com/yunology/ts-multi-tenancy' },
 ];
 const sidebar: DefaultTheme.Sidebar = {
   '/': [
@@ -45,6 +44,9 @@ const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 };
+const socialLinks: Array<DefaultTheme.SocialLink> = [
+  { icon: 'github', link: 'https://github.com/yunology/ts-multi-tenancy' },
+];
 
 export default defineConfig({
   base: '/ts-multi-tenancy-doc/',
@@ -52,5 +54,6 @@ export default defineConfig({
   themeConfig: {
     nav,
     sidebar,
+    socialLinks,
   },
 });
