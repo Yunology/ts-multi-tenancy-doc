@@ -30,7 +30,6 @@ const sidebar: DefaultTheme.Sidebar = {
     {
       text: 'Designs',
       collapsed: true,
-      collapsible: true,
       items: [
         {
           text: 'Model Entities',
@@ -38,6 +37,12 @@ const sidebar: DefaultTheme.Sidebar = {
           items: [
             { text: 'Base Entity', link: '/designs/entities/base' },
             { text: 'Tenant Base Entity', link: '/designs/entities/tenant-base' },
+          ],
+        },
+        {
+          text: 'Services',
+          items: [
+            { text: 'Permission', link: '/designs/services/permission' },
           ],
         },
       ],
