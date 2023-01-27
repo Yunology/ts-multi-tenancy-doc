@@ -7,7 +7,7 @@ hero:
   tagline: A multi-tenancy structure provider base on TypeScript, using TypeORM to manage db and tsoa to holding OpenAPI(Swagger).
   actions:
     - text: Get Started →
-      link: /guide/usage/0-build-the-environement
+      link: /guide/usage/0-build-the-environment
 
 features:
   - title: Multi-Tenancy structure pre-build platform

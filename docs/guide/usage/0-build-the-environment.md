@@ -1,4 +1,4 @@
-# Build the environement
+# Build the environment
 
 ## Install TypeScript
 ```bash

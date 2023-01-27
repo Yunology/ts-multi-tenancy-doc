@@ -57,7 +57,7 @@ If the name is `.env.something`, than use `env ENV_NAME=something`.
 The `.env` prefix is required.  
 
 ::: tip
-env file is created @ [[0. build the environment](/guide/usage/0-build-the-environement)].
+env file is created @ [[0. build the environment](/guide/usage/0-build-the-environment)].
 :::
 
 ### cli_datasource.ts

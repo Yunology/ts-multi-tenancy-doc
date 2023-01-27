@@ -1,5 +1,4 @@
-# Service with busniess logics
-
+# Service with business logics
 ::: code-group
 ```typescript [src/service/user.ts]
 // src/service/user.ts

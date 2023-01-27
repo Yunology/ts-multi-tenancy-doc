@@ -2,7 +2,7 @@ import { DefaultTheme, defineConfig } from "vitepress";
 
 const nav: Array<DefaultTheme.NavItem> = [
   { text: 'Home', link: '/' },
-  { text: 'Usage', link: '/guide/usage/0-build-the-environement' },
+  { text: 'Usage', link: '/guide/usage/0-build-the-environment' },
 ];
 const sidebar: DefaultTheme.Sidebar = {
   '/': [
@@ -19,10 +19,10 @@ const sidebar: DefaultTheme.Sidebar = {
       collapsed: true,
       collapsible: true,
       items: [
-        { text: '0. Build the environment', link: '/guide/usage/0-build-the-environement' },
+        { text: '0. Build the environment', link: '/guide/usage/0-build-the-environment' },
         { text: '1. Prepare your model', link: '/guide/usage/1-prepare-your-model' },
         { text: '2. Database infrastructure', link: '/guide/usage/2-database-infrastructure' },
-        { text: '3. Service with busniess logics', link: '/guide/usage/3-service-with-busniess-logics' },
+        { text: '3. Service with business logics', link: '/guide/usage/3-service-with-business-logics' },
         { text: '4. Plan groups services', link: '/guide/usage/4-plan-groups-services' },
         { text: '5. Tool scripts for migration', link: '/guide/usage/5-toolscripts-for-migration' },
       ],

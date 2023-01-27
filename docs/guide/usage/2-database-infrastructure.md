@@ -27,7 +27,7 @@ export class UserInfrastructure extends InfrastructureManyModifiable<User> {
     super(User);
   }
 
-  // ... methods how you opearte your database ...
+  // ... methods how you operate your database ...
   public getById(
     manager: EntityManager, { tenantId }: RuntimeTenant, id: string,
   ): Promise<User> {
