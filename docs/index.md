@@ -6,8 +6,12 @@ hero:
   name: ts-multi-tenancy
   tagline: A multi-tenancy structure provider base on TypeScript, using TypeORM to manage db and tsoa to holding OpenAPI(Swagger).
   actions:
-    - text: Get Started →
+    - theme: brand
+      text: Get Started →
       link: /guide/usage/0-build-the-environment
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/yunology/ts-multi-tenancy
 
 features:
   - title: Multi-Tenancy structure pre-build platform

@@ -177,6 +177,7 @@ app.listen(port);
 ## FAQ
 ### Q1.
 **What if before login success, I can't get method with `operator: User` as first argument but I still want to do permission check inside method?**  
+::: details Answer:
 Don't use `@PermissionRequire` at such method.  
 Here is an example for `login` method:  
 ```typescript
@@ -206,9 +207,11 @@ export class AuthService extends Service {
   // ...
 }
 ```
+:::
 
 ### Q2.
 **Can I use multiple `PermissionRequire` decorator at same method?**  
+::: details Answer:
 Yes, but currently if you use decorator more than once at same method.  
 All permission should be satisfied to execute method.  
 ```typescript
@@ -223,3 +226,4 @@ export class AuthService extends Service {
 ```
 For example:  
 To execute method login, user should satisfied with both permission LOGIN & ANOTHER_LOGIN.  
+:::
