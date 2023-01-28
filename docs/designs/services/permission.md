@@ -1,6 +1,7 @@
 # Permission
 `ts-multi-tenancy` provides a way to describe the service permission & how methods been guards.  
 `Permission` and its decorator can only use at child class of `Service`.  
+The following code presenting a `AuthService` with permission control, at bottom will shows the whole code.  
 
 ## registerPermissionValidateFunction
 Describe how you validate a method is pass permission or not.  
@@ -125,9 +126,57 @@ export class AuthService extends Service {
 }
 ```
 
+## Whole Codes
+::: code-group
+```typescript [src/service/auth.ts]
+import { Permission, PermissionTree, Service } from '@yunology/ts-multi-tenancy';
+
+import { User } from 'path/to/user/entry/class';
+import { UserInfrastructure } from 'path/to/user/infrastructure/class';
+
+export interface IAuthPermission extends PermissionTree {
+  LOGIN: Permission;
+  LOGOUT: Permission;
+};
+
+export const AuthPermission: IAuthPermission = {
+  LOGIN: new Permission(0x0001, 'LOGIN', 'allow to login'),
+  LOGOUT: new Permission(0x0002, 'LOGOUT', 'allow to logout'),
+};
+
+@SetupPermission<IAuthPermission>(AuthPermission)
+export class AuthService extends Service {
+  @PermissionRequire(AuthPermission.LOGIN)
+  async login(operator: User, account: string, password): Promise<boolean> {
+    const getUser = UserInfrastructure.getInstance().someMethodToGet(account, password);
+    return getUser !== undefined;
+  }
+}
+```
+```typescript [src/app.ts]
+const app = express();
+// ...
+registerPermissionValidateFunction(async (
+  service: Service, permission: Permission, ...args: unknown[]
+) => {
+  const employee = args[0] as Employee;
+  const tenant = getTenantService().getTenantByInfo(user.tenantId);
+  const { permissions } = employee;
+  return permissions.some((per: number) => tenant!.isPermissionMatched(per, perission));
+});
+// ...
+await initMultiTenancy(...);
+// ...
+app.use(...);
+app.get(...);
+// ...
+app.listen(port);
+```
+:::
+
 ## FAQ
 ### Q1.
-#### What if before login success, I can't get method with `operator: User` as first argument but I still want to do permission check inside method?
+**What if before login success, I can't get method with `operator: User` as first argument but I still want to do permission check inside method?**  
 Don't use `@PermissionRequire` at such method.  
 Here is an example for `login` method:  
 ```typescript
@@ -157,3 +206,20 @@ export class AuthService extends Service {
   // ...
 }
 ```
+
+### Q2.
+**Can I use multiple `PermissionRequire` decorator at same method?**  
+Yes, but currently if you use decorator more than once at same method.  
+All permission should be satisfied to execute method.  
+```typescript
+export class AuthService extends Service {
+  @PermissionRequire(AuthPermission.LOGIN)
+  @PermissionRequire(AuthPermission.ANOTHER_LOGIN)
+  async login(operator: User, account: string, password): Promise<boolean> {
+    const getUser = UserInfrastructure.getInstance().someMethodToGet(account, password);
+    return getUser !== undefined;
+  }
+}
+```
+For example:  
+To execute method login, user should satisfied with both permission LOGIN & ANOTHER_LOGIN.  
