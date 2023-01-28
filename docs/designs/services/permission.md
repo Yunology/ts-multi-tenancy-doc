@@ -53,7 +53,7 @@ registerPermissionValidateFunction(async (
   const employee = args[0] as Employee;
   const tenant = getTenantService().getTenantByInfo(user.tenantId);
   const { permissions } = employee;
-  return permissions.some((per: number) => tenant!.isPermissionMatched(per, perission));
+  return permissions.some((per: number) => tenant!.isPermissionMatched(per, permission));
 });
 ```
 Of course, you can make your own change, this is just an example.  
@@ -162,7 +162,7 @@ registerPermissionValidateFunction(async (
   const employee = args[0] as Employee;
   const tenant = getTenantService().getTenantByInfo(user.tenantId);
   const { permissions } = employee;
-  return permissions.some((per: number) => tenant!.isPermissionMatched(per, perission));
+  return permissions.some((per: number) => tenant!.isPermissionMatched(per, permission));
 });
 // ...
 await initMultiTenancy(...);
