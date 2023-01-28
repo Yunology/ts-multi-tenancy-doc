@@ -43,6 +43,7 @@ const sidebar: DefaultTheme.Sidebar = {
           text: 'Services',
           items: [
             { text: 'Permission', link: '/designs/services/permission' },
+            { text: 'Config', link: '/designs/services/config' },
           ],
         },
       ],
