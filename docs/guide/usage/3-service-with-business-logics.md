@@ -1,4 +1,9 @@
 # Service with business logics
+Write the business logic at here.  
+::: tip
+You should focus at how to archive the need of particular functionalities.  
+You can do some data cleaning too, but we suggest you to put into Infrastructure to make these methods **as simple as possible**.  
+:::
 ::: code-group
 ```typescript [src/service/user.ts]
 // src/service/user.ts
@@ -28,4 +33,8 @@ export class UserService extends DataService {
   }
 }
 ```
+:::
+
+::: tip TIP: Permission & Config support @ Service
+Check [Service page](/designs/services/data-service)
 :::
