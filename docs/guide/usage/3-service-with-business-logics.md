@@ -34,7 +34,3 @@ export class UserService extends DataService {
 }
 ```
 :::
-
-::: tip TIP: Permission & Config support @ Service
-Check [Service page](/designs/services/data-service)
-:::
